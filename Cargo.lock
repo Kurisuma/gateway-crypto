@@ -837,6 +837,35 @@ dependencies = [
 ]
 
 [[package]]
+name = "gw-verification-suite"
+version = "0.1.0"
+dependencies = [
+ "alloy-primitives",
+ "async-trait",
+ "chrono",
+ "gw-adapters-btc",
+ "gw-adapters-evm",
+ "gw-adapters-move",
+ "gw-adapters-svm",
+ "gw-adapters-ton",
+ "gw-adapters-tvm",
+ "gw-api",
+ "gw-chain-traits",
+ "gw-db",
+ "gw-engine",
+ "gw-kms-enclave",
+ "gw-memcache",
+ "gw-primitives",
+ "gw-treasury",
+ "proptest",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "uuid",
+]
+
+[[package]]
 name = "hashbrown"
 version = "0.15.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"

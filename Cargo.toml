@@ -15,6 +15,7 @@ members = [
     "crates/gw-treasury",
     "crates/gw-api",
     "crates/gw-db",
+    "crates/gw-verification-suite",
 ]
 
 [workspace.lints.rust]
