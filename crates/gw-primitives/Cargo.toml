@@ -1,0 +1,16 @@
+[package]
+name = "gw-primitives"
+version = "0.1.0"
+edition = "2024"
+description = "Canonical domain primitives, fixed-point integer types, taxonomic enums, and sovereign error model"
+
+[lints]
+workspace = true
+
+[dependencies]
+alloy-primitives = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }

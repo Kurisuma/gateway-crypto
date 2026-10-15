@@ -1,0 +1,45 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/gw-primitives",
+    "crates/gw-memcache",
+    "crates/gw-chain-traits",
+    "crates/gw-db",
+]
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unused_must_use = "deny"
+
+[workspace.lints.clippy]
+float_arithmetic = "deny"
+cast_possible_truncation = "deny"
+cast_sign_loss = "deny"
+unwrap_used = "deny"
+expect_used = "warn"
+indexing_slicing = "deny"
+
+[workspace.dependencies]
+gw-primitives = { path = "crates/gw-primitives" }
+gw-db = { path = "crates/gw-db" }
+alloy-primitives = { version = "0.8", default-features = false, features = ["serde"] }
+async-trait = "0.1"
+bitcoin = { version = "0.32", features = ["serde", "rand-std"] }
+chrono = { version = "0.4", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+subtle = "2.6"
+thiserror = "2.0"
+tokio = { version = "1.43", features = ["full"] }
+uuid = { version = "1.12", features = ["v4", "v7", "serde"] }
+zeroize = { version = "1.8", features = ["derive"] }
+blake3 = "1.5"
+parking_lot = "0.12"
+arc-swap = "1.7"
+hex = "0.4"
+bs58 = "0.5"
+proptest = "1.6"
+oberer-orm = { git = "https://github.com/Kurisuma/Oberer-lite.git" }
+oberer-orm-derive = { git = "https://github.com/Kurisuma/Oberer-lite.git" }

@@ -1,0 +1,19 @@
+[package]
+name = "gw-chain-traits"
+version = "0.1.0"
+edition = "2024"
+description = "Enterprise polymorphic trait catalog, network adapter registry, and standardized transaction envelopes"
+
+[lints]
+workspace = true
+
+[dependencies]
+gw-primitives = { workspace = true }
+alloy-primitives = { workspace = true }
+async-trait = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+uuid = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
