@@ -98,3 +98,26 @@ This document specifies the non-negotiable coding standards, architectural invar
 1. **Checklist Tracking:** Maintain and update [`tasks.md`](./tasks.md) as each implementation phase or component is completed.
 2. **Mathematical Verification:** Any new algebraic formula, queueing model, or fee threshold must have a corresponding test in `crates/gw-primitives/tests/mathematical_theory_tests.rs`.
 3. **VCS Hygiene:** Keep commits atomic, well-described, and pushed to `https://github.com/Kurisuma/gateway-crypto`.
+
+---
+
+## 8. Mandatory Phase Completion Audit Protocol (Theory, Tests & Math Gate)
+
+Before marking any implementation phase as completed (`[x]`) in [`tasks.md`](./tasks.md), the following 4-part **Mathematical Theory, Invariant & Test Audit** MUST be performed and verified:
+
+1. **Mathematical Theory Cross-Reference:**
+   - Audit all implemented functions, formulas, and state-transitions against their corresponding formal equations in `UNIFIED_RUST_CRYPTO_GATEWAY_AND_TREASURY_SPEC_THEORY.md` and `ENTERPRISE_IN_MEMORY_CACHE_SPEC_THEORY.md`.
+   - Ensure zero informal or heuristic shortcuts: all calculations must strictly mirror the theoretical proofs (e.g. Erlang-B bounds, homomorphism preservation $\mathcal{N}_{18}$, FIFO prefix sums $\delta_k$, 5-Gate Boolean logic).
+
+2. **Dedicated Mathematical Tests:**
+   - Every theoretical theorem or equation relevant to the phase must have an explicit automated test in `crates/gw-primitives/tests/mathematical_theory_tests.rs` or the crate's test suite.
+   - Run both deterministic boundary test cases (e.g., exact $150\text{ bps}$ vs. $151\text{ bps}$ circuit breaker) and property-based fuzz tests via `proptest`.
+
+3. **Compiler Lints & Invariant Audits:**
+   - Verify `#![forbid(unsafe_code)]` compliance.
+   - Run `cargo clippy --workspace --all-targets -- -D warnings` and verify **0 errors and 0 warnings**.
+   - Verify that `f32`/`f64` usage remains 0 across all touched code.
+
+4. **Audit Documentation:**
+   - Record the mathematical audit findings, verified theorems, and test outputs directly in [`tasks.md`](./tasks.md) under the phase's **Mathematical Theory & Invariants Audit Gate** checklist item.
+

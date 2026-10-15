@@ -90,7 +90,12 @@ Status Legend:
 - [x] **1.5 Unit Tests & Property-Based Invariant Verification**
   - [x] Fixed-point arithmetic tests (checked addition, subtraction, BPS scaling, and decimal normalization).
   - [x] Dust truncation verification ensuring clean checkout numbers.
-
+- [x] **1.6 Mathematical Theory & Invariants Audit Gate**
+  - [x] Theorem 1.1 (Canonical 18-Decimal Homomorphism $\mathcal{N}_{18}$) proven and verified via Proptest fuzzing.
+  - [x] Theorem 1.2 (Clean 18-Decimal Dust Truncation $\mathcal{T}_{\text{clean}}$) exactness tested.
+  - [x] Theorem 1.3 (Dual-Oracle Deviation Guard $\le 150\text{ bps}$) boundary tested.
+  - [x] Theorem 1.4 (Zero-Dust Hot-Wallet Split $Q_{\text{cold}} + Q_{\text{market}} \equiv B$) verified.
+  - [x] Compiler check: `#![forbid(unsafe_code)]` enforced, 0 float usages, 0 clippy warnings.
 
 ---
 
@@ -117,6 +122,12 @@ Status Legend:
   - [x] Verified watchlist O(1) registration and zeroized removal.
   - [x] Verified oracle deviation circuit breaker blocking poisoned feeds and auto-purging stale rates.
   - [x] Verified Zone C enclave anti-replay guard blocking duplicate transaction digests.
+- [x] **2.7 Mathematical Theory & Invariants Audit Gate**
+  - [x] Theorem 2.1 (Anti-HashDoS Sharding & 128-byte cache-line alignment) verified.
+  - [x] Theorem 2.2 (Sub-20ns double-buffered snapshot reader) verified.
+  - [x] Theorem 2.3 (7-day atomic replay guard) verified.
+  - [x] Priority retention scoring and Erlang-B pool sizing bounds verified in tests.
+  - [x] Compiler check: `#![forbid(unsafe_code)]` enforced, 0 float usages, 0 clippy warnings.
 
 ---
 
@@ -137,6 +148,10 @@ Status Legend:
   - [x] `UnifiedNetworkAdapter`: Master supertrait composed of Traits 1–4.
 - [x] **3.3 Thread-Safe Adapter Registry (`NetworkAdapterRegistry`)**
   - [x] Dynamic registration, retrieval, and unified iteration over `Arc<dyn UnifiedNetworkAdapter>`.
+- [x] **3.4 Mathematical Theory & Invariants Audit Gate**
+  - [x] Invariant I & III verified: `UnsignedTransactionEnvelope` passes only unsigned payloads without private keys.
+  - [x] Watchlist lookup key generation verified for both Direct and Reference modes.
+  - [x] Compiler check: `#![forbid(unsafe_code)]` enforced, pure safe Rust, 0 clippy warnings.
 
 ---
 
@@ -179,6 +194,13 @@ Status Legend:
 - [ ] Sui checkpoint indexer scanning transaction blocks and balance changes.
 - [ ] Programmable Transaction Block (PTB) assembler (`MergeCoins` + `TransferObjects`).
 - [ ] Gas station sponsorship integration for fee-sponsored customer sweeps.
+- [ ] **4.7 Mathematical Theory & Invariants Audit Gate**
+  - [ ] Theorem 2.2 (EVM & TVM CREATE2 Proxy Algebra) verification.
+  - [ ] Theorem 2.3 (Solana SVM Reference Pubkey & PDA Off-Curve Proof) verification.
+  - [ ] Tron 1-Sun Dust Keeper mechanics verification ($V_{\text{sweep}} = B - 1$).
+  - [ ] TON 40-bit Feistel Crockford Base32 Memo verification.
+  - [ ] Zero private keys in Zone A/B adapter crates verified.
+  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
 
 ---
 
@@ -196,6 +218,11 @@ Status Legend:
   - [ ] Parent-hash sliding window ring buffer (depth 32).
   - [ ] Lowest Common Ancestor (LCA) search algorithm.
   - [ ] Clean rollback of `Detected` invoices to `Pending` upon detected fork.
+- [ ] **5.4 Mathematical Theory & Invariants Audit Gate**
+  - [ ] 5-Gate Boolean logic and slip evaluation ($R_{\text{rec}} \ge R_{\min}$) formal tests.
+  - [ ] Typestate compile-time consumption invariants verified.
+  - [ ] LCA ring-buffer fork rollback invariant verified.
+  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
 
 ---
 
@@ -212,6 +239,11 @@ Status Legend:
   - [ ] Key derivation inside `Zeroizing<[u8; 64]>` ephemeral buffers.
   - [ ] Concrete signers: secp256k1 (Bitcoin, EVM, Tron), ed25519 (Solana, TON, Sui).
   - [ ] Mock and AWS Nitro Enclave VSOCK attestation interfaces.
+- [ ] **6.4 Mathematical Theory & Invariants Audit Gate**
+  - [ ] Invariant I & III: Zero private keys outside Zone C.
+  - [ ] Invariant IV: Ephemeral zeroized cryptographic memory verified.
+  - [ ] Enclave anti-replay nonce mathematical collision resistance verified.
+  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
 
 ---
 
@@ -227,6 +259,11 @@ Status Legend:
   - [ ] Dynamic threshold calculation for economical sweeps (gas vs. deposit value).
   - [ ] Automated Tier 1 Gas Relayer replenishment planner.
   - [ ] Policy-driven cold storage flush and exchange disposal routing.
+- [ ] **7.4 Mathematical Theory & Invariants Audit Gate**
+  - [ ] Integer FIFO depletion calculus $\delta_k$ and realized P&L invariant verified.
+  - [ ] Zero-dust hot-wallet split $\alpha_{\text{cold}}$ verified.
+  - [ ] Multi-chain canonical homomorphism portfolio summation verified.
+  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
 
 ---
 
@@ -242,6 +279,10 @@ Status Legend:
 - [ ] **8.2 Security Middleware & Zero-Key Enforcement**
   - [ ] Cryptographic idempotency checking via `gw-memcache`.
   - [ ] Strict isolation from private key signing material (no signing crates in dependency tree).
+- [ ] **8.3 Mathematical Theory & Invariants Audit Gate**
+  - [ ] Dependency tree audit: Zero signing/key crates in Zone A.
+  - [ ] Idempotency key replay immunity verified.
+  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
 
 ---
 
@@ -253,6 +294,10 @@ Status Legend:
   - [x] Automated table creation and schema migration (`migrate_all`).
   - [x] Sub-10ms cold-start hydration (`hydrate_watchlist`) loading active unexpired checkout invoices into `InProcessWatchlistEngine`.
   - [x] Invoice CRUD, FIFO cost-basis lot ingestion, and realized P&L records.
+- [x] **9.3 Mathematical Theory & Invariants Audit Gate**
+  - [x] Oberer-lite SQLite integration without external daemons verified.
+  - [x] Sub-10ms cold-start watchlist hydration benchmark verified in tests.
+  - [x] Compiler check: 0 float usages, 0 clippy warnings.
 
 ---
 
@@ -268,6 +313,10 @@ Status Legend:
 - [ ] **10.3 Compiler Lint Audit & Zero-Key Verification**
   - [ ] `cargo clippy --all-targets -- -D warnings` passing cleanly.
   - [ ] `cargo tree -p gw-api` verification confirming zero private key dependencies.
+- [ ] **10.4 Mathematical Theory & Invariants Audit Gate**
+  - [ ] Complete mathematical proof coverage across all 8 networks and 11 theorems.
+  - [ ] Fuzz test invariants hold across $10^6$ iterations.
+  - [ ] Workspace compiler zero-warning and forbid(unsafe_code) verification.
 
 ---
 
@@ -275,18 +324,18 @@ Status Legend:
 
 ```mermaid
 flowchart TD
-    P1[Phase 1: Workspace & gw-primitives] --> P2[Phase 2: gw-memcache]
-    P1 --> P3[Phase 3: gw-chain-traits]
-    P2 --> P4[Phase 4: Multi-Chain Adapters]
+    P1["Phase 1: Workspace & gw-primitives [Done]"] --> P2["Phase 2: gw-memcache [Done]"]
+    P1 --> P3["Phase 3: gw-chain-traits [Done]"]
+    P1 --> P9["Phase 9: SQLite Ledger gw-db [Done]"]
+    P2 --> P4["Phase 4: Multi-Chain Adapters [/]"]
     P3 --> P4
-    P4 --> P5[Phase 5: gw-engine 5-Gate Verifier]
-    P3 --> P6[Phase 6: gw-kms-enclave Zone C]
-    P5 --> P7[Phase 7: gw-treasury FIFO]
+    P4 --> P5["Phase 5: gw-engine 5-Gate Verifier"]
+    P3 --> P6["Phase 6: gw-kms-enclave Zone C"]
+    P5 --> P7["Phase 7: gw-treasury FIFO"]
     P6 --> P7
-    P5 --> P8[Phase 8: gw-api Checkout]
+    P5 --> P8["Phase 8: gw-api Checkout"]
     P7 --> P8
-    P1 --> P9[Phase 9: Postgres Schema]
-    P8 --> P10[Phase 10: Fuzzing & Audit]
+    P8 --> P10["Phase 10: Fuzzing & Audit"]
 ```
 
-**Immediate Action:** Begin Phase 1 (Create Workspace `Cargo.toml`, establish strict workspace lints, implement `gw-primitives` with `RawAssetAmount`, `UsdMicros`, taxonomy enums, and comprehensive unit tests).
+**Immediate Action:** Execute Phase 4 (Implement 6 concrete network adapters: `gw-adapters-btc`, `gw-adapters-evm`, `gw-adapters-svm`, `gw-adapters-tvm`, `gw-adapters-ton`, `gw-adapters-move` satisfying the 100% trait catalog and mathematical invariants).
