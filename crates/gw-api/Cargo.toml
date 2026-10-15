@@ -1,0 +1,34 @@
+[package]
+name = "gw-api"
+version = "0.1.0"
+edition = "2024"
+authors = ["Antigravity Engineering"]
+description = "Zone A sovereign checkout and treasury dashboard REST/WebSocket API with zero private keys"
+license = "MIT OR Apache-2.0"
+
+[lints]
+workspace = true
+
+[dependencies]
+gw-primitives = { workspace = true }
+gw-memcache = { workspace = true }
+gw-chain-traits = { workspace = true }
+gw-engine = { workspace = true }
+gw-treasury = { workspace = true }
+gw-db = { workspace = true }
+alloy-primitives = { workspace = true }
+async-trait = { workspace = true }
+axum = { workspace = true }
+chrono = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+tower = { workspace = true }
+tower-http = { workspace = true }
+uuid = { workspace = true }
+parking_lot = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }
+gw-adapters-evm = { workspace = true }

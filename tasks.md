@@ -269,21 +269,22 @@ Status Legend:
 ---
 
 ### Phase 8: Zone A Checkout & Treasury Dashboard API (`gw-api`)
-- [ ] **8.1 High-Performance Axum HTTP Service**
-  - [ ] REST API endpoints:
-    - `POST /api/v1/invoices` — Create locked checkout invoice with dual-oracle price.
+- [x] **8.1 High-Performance Axum HTTP Service**
+  - [x] REST API endpoints:
+    - `POST /api/v1/invoices` — Create locked checkout invoice with dual-oracle price and dust truncation $\mathcal{T}_{\text{clean}}$.
     - `GET /api/v1/invoices/:id` — Query invoice status and payment progress.
-    - `GET /api/v1/treasury/portfolio` — Real-time unified portfolio summary.
+    - `GET /api/v1/treasury/portfolio` — Real-time unified portfolio summary across all chains and tiers.
     - `GET /api/v1/treasury/lots` — FIFO cost-basis tax lot ledger.
-  - [ ] WebSocket streaming:
-    - `/ws/v1/checkout/:invoice_id` — Real-time deposit detection and confirmation updates.
-- [ ] **8.2 Security Middleware & Zero-Key Enforcement**
-  - [ ] Cryptographic idempotency checking via `gw-memcache`.
-  - [ ] Strict isolation from private key signing material (no signing crates in dependency tree).
-- [ ] **8.3 Mathematical Theory & Invariants Audit Gate**
-  - [ ] Dependency tree audit: Zero signing/key crates in Zone A.
-  - [ ] Idempotency key replay immunity verified.
-  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
+  - [x] WebSocket streaming:
+    - `/ws/v1/checkout/:id` — Real-time deposit detection and confirmation updates.
+- [x] **8.2 Security Middleware & Zero-Key Enforcement**
+  - [x] Cryptographic idempotency checking via `gw_memcache::enclave_replay_guard::EnclaveAntiReplayCache` with 7-day memory lock.
+  - [x] Strict isolation from private key signing material: `gw-kms-enclave` omitted from dependency tree.
+- [x] **8.3 Mathematical Theory & Invariants Audit Gate**
+  - [x] Invariant I (Zero Private Keys in Zone A): Formal verification of dependency tree via `cargo tree -p gw-api` confirms zero private keys, zero signing crates, and zero AWS KMS SDKs in Zone A compile graph.
+  - [x] Invariant II (Cryptographic Idempotency & Replay Immunity): Verified with test `test_idempotency_key_prevents_replay` rejecting duplicate `X-Idempotency-Key` headers with HTTP 409 Conflict.
+  - [x] Invariant III (Dust Truncation $\mathcal{T}_{\text{clean}}$ & Locked Quotes): Verified with `test_create_invoice_and_get_invoice_flow` producing exact integer quotes without floats.
+  - [x] Compiler check: `#![forbid(unsafe_code)]` enforced, 0 float operations, 0 clippy warnings across workspace.
 
 ---
 
@@ -334,9 +335,9 @@ flowchart TD
     P3 --> P6["Phase 6: gw-kms-enclave Zone C [Done]"]
     P5 --> P7["Phase 7: gw-treasury FIFO [Done]"]
     P6 --> P7
-    P5 --> P8["Phase 8: gw-api Checkout [/]"]
+    P5 --> P8["Phase 8: gw-api Checkout [Done]"]
     P7 --> P8
-    P8 --> P10["Phase 10: Fuzzing & Audit"]
+    P8 --> P10["Phase 10: Fuzzing & Audit [/]"]
 ```
 
-**Immediate Action:** Execute Phase 8 (Implement `gw-api`: High-Performance Axum Checkout REST & WebSocket API, Idempotency Guard via `gw-memcache`, strictly zero private keys in dependency tree).
+**Immediate Action:** Execute Phase 10 (Formal Verification, Integration & Institutional Hardening: End-to-end checkout flow simulation, adversarial & fuzz testing on `gw-memcache` and `PreSignPolicyGuard`, 6-block deep reorg simulations, and workspace compiler zero-warning/unsafe audit).

@@ -13,6 +13,7 @@ members = [
     "crates/gw-engine",
     "crates/gw-kms-enclave",
     "crates/gw-treasury",
+    "crates/gw-api",
     "crates/gw-db",
 ]
 
@@ -36,6 +37,7 @@ gw-chain-traits = { path = "crates/gw-chain-traits" }
 gw-engine = { path = "crates/gw-engine" }
 gw-kms-enclave = { path = "crates/gw-kms-enclave" }
 gw-treasury = { path = "crates/gw-treasury" }
+gw-api = { path = "crates/gw-api" }
 gw-db = { path = "crates/gw-db" }
 gw-adapters-btc = { path = "crates/gw-adapters-btc" }
 gw-adapters-evm = { path = "crates/gw-adapters-evm" }
@@ -64,4 +66,7 @@ bs58 = "0.5"
 proptest = "1.6"
 oberer-orm = { git = "https://github.com/Kurisuma/Oberer-lite.git" }
 oberer-orm-derive = { git = "https://github.com/Kurisuma/Oberer-lite.git" }
+axum = { version = "0.8", features = ["ws"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
 
