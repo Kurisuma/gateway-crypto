@@ -1,0 +1,22 @@
+[package]
+name = "gw-adapters-svm"
+version = "0.1.0"
+edition = "2024"
+
+[lints]
+workspace = true
+
+[dependencies]
+gw-primitives = { workspace = true }
+gw-chain-traits = { workspace = true }
+alloy-primitives = { workspace = true }
+async-trait = { workspace = true }
+curve25519-dalek = { workspace = true }
+sha2 = { workspace = true }
+bs58 = { workspace = true }
+uuid = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }

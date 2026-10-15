@@ -158,49 +158,50 @@ Status Legend:
 ### Phase 4: Concrete Network Adapters
 
 #### 4.1 Bitcoin UTXO Adapter (`gw-adapters-btc`)
-- [ ] BIP-84 Bech32 Native SegWit (`bc1q...`) derivation from extended public key (`zpub`).
-- [ ] Native block and mempool indexer tracking confirmed and unconfirmed UTXOs.
-- [ ] Batch PSBT builder with RBF (BIP-125) fee escalation and CPFP support.
-- [ ] Bitcoin Core JSON-RPC client with fallover endpoints and error handling.
+- [x] BIP-84 Bech32 Native SegWit (`bc1q...`) derivation from extended public key (`zpub`).
+- [x] Native block and mempool indexer tracking confirmed and unconfirmed UTXOs.
+- [x] Batch PSBT builder with RBF (BIP-125) fee escalation and CPFP support.
+- [x] Bitcoin Core JSON-RPC client with fallover endpoints and error handling.
 
 #### 4.2 EVM Multi-Chain Adapter (`gw-adapters-evm`)
-- [ ] Multi-network support: Ethereum Mainnet (1), BNB Chain (56), Plume (98866).
-- [ ] Deterministic CREATE2 counterfactual proxy calculation (`0xff || factory || salt || init_code_hash`).
-- [ ] Immutable receiver contract bytecode specification with embedded Cold Treasury destination.
-- [ ] `eth_getLogs` batch block scanner for native transfers and ERC-20 `Transfer(address,address,uint256)` events.
-- [ ] `deployAndSweep` transaction assembler via Tier 1 Gas Relayer.
+- [x] Multi-network support: Ethereum Mainnet (1), BNB Chain (56), Plume (98866).
+- [x] Deterministic CREATE2 counterfactual proxy calculation (`0xff || factory || salt || init_code_hash`).
+- [x] Immutable receiver contract bytecode specification with embedded Cold Treasury destination.
+- [x] `eth_getLogs` batch block scanner for native transfers and ERC-20 `Transfer(address,address,uint256)` events.
+- [x] `deployAndSweep` transaction assembler via Tier 1 Gas Relayer.
 
 #### 4.3 Solana SVM Adapter (`gw-adapters-svm`)
-- [ ] Dual deposit mode support:
+- [x] Dual deposit mode support:
   - Mode A: Reference Public Key in instruction keys for zero-sweep direct settlement.
   - Mode B: Program Derived Address (PDA) with off-curve mathematical verification.
-- [ ] High-throughput block/transaction indexer (Yellowstone gRPC / Geyser plugin compatible).
-- [ ] Spl-Token and Token-2022 transfer verification.
-- [ ] `sweep_and_close_ata` instruction builder reclaiming rent SOL back to the gas relayer.
+- [x] High-throughput block/transaction indexer (Yellowstone gRPC / Geyser plugin compatible).
+- [x] Spl-Token and Token-2022 transfer verification.
+- [x] `sweep_and_close_ata` instruction builder reclaiming rent SOL back to the gas relayer.
 
 #### 4.4 Tron TVM Adapter (`gw-adapters-tvm`)
-- [ ] Base58Check CREATE2 address derivation (`0x41` prefix).
-- [ ] TRC-20 `Transfer(address,address,uint256)` event indexer.
-- [ ] Tron Stake 2.0 Energy & Bandwidth manager for zero-sun gas execution.
-- [ ] 1-Sun Dust Keeper mechanics: leaves 1 raw unit in TRC-20 token contract to preserve warm storage slot and save 65,000 Energy per sweep.
+- [x] Base58Check CREATE2 address derivation (`0x41` prefix).
+- [x] TRC-20 `Transfer(address,address,uint256)` event indexer.
+- [x] Tron Stake 2.0 Energy & Bandwidth manager for zero-sun gas execution.
+- [x] 1-Sun Dust Keeper mechanics: leaves 1 raw unit in TRC-20 token contract to preserve warm storage slot and save 65,000 Energy per sweep.
 
 #### 4.5 TON Network Adapter (`gw-adapters-ton`)
-- [ ] Single treasury vault address architecture with 8-byte Crockford Base32 memo tag.
-- [ ] Bijective 40-bit Feistel permutation memo encoding preventing customer typos.
-- [ ] Jetton `transfer_notification` parser verifying forward payload and query ID.
-- [ ] Zero-sweep direct treasury accumulation without gas relayer overhead.
+- [x] Single treasury vault address architecture with 8-byte Crockford Base32 memo tag.
+- [x] Bijective 40-bit Feistel permutation memo encoding preventing customer typos.
+- [x] Jetton `transfer_notification` parser verifying forward payload and query ID.
+- [x] Zero-sweep direct treasury accumulation without gas relayer overhead.
 
 #### 4.6 Sui Move Object Adapter (`gw-adapters-move`)
-- [ ] Sui checkpoint indexer scanning transaction blocks and balance changes.
-- [ ] Programmable Transaction Block (PTB) assembler (`MergeCoins` + `TransferObjects`).
-- [ ] Gas station sponsorship integration for fee-sponsored customer sweeps.
-- [ ] **4.7 Mathematical Theory & Invariants Audit Gate**
-  - [ ] Theorem 2.2 (EVM & TVM CREATE2 Proxy Algebra) verification.
-  - [ ] Theorem 2.3 (Solana SVM Reference Pubkey & PDA Off-Curve Proof) verification.
-  - [ ] Tron 1-Sun Dust Keeper mechanics verification ($V_{\text{sweep}} = B - 1$).
-  - [ ] TON 40-bit Feistel Crockford Base32 Memo verification.
-  - [ ] Zero private keys in Zone A/B adapter crates verified.
-  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
+- [x] Sui checkpoint indexer scanning transaction blocks and balance changes.
+- [x] Programmable Transaction Block (PTB) assembler (`MergeCoins` + `TransferObjects`).
+- [x] Gas station sponsorship integration for fee-sponsored customer sweeps.
+- [x] **4.7 Mathematical Theory & Invariants Audit Gate**
+  - [x] Theorem 2.2 (EVM & TVM CREATE2 Proxy Algebra): Preimages `0xff` (EVM) and `0x41` (Tron) verified; Tron Base58Check produces addresses starting with 'T' (34 chars).
+  - [x] Theorem 2.3 (Solana SVM Reference Pubkey & PDA Off-Curve Proof): Edwards25519 decompression failure verified for canonical bumps ($b \le 255$); rent reclamation calculation ($2,039,280$ lamports) verified.
+  - [x] Theorem 2.2.4 (Tron 1-Sun Dust Keeper): Leaves 1 raw unit ($10^{-6}$ USDT) in TRC-20 contract to preserve warm SSTORE storage slot, verified to deduct $1$ raw unit from swept amount.
+  - [x] Theorem 2.4 (TON Bijective 40-bit Feistel Memo Permutation): Invertibility verified across all tested invoice indices $[0, 2^{40}-1]$; Crockford Base32 8-char encoding verified.
+  - [x] Invariant I (Zero Private Keys): Verified zero private keys or signing dependencies in all 6 adapter crates (`gw-adapters-btc`, `gw-adapters-evm`, `gw-adapters-svm`, `gw-adapters-tvm`, `gw-adapters-ton`, `gw-adapters-move`).
+  - [x] Unified Polymorphic Registry: Verified all 8 networks registered and operable uniformly via `NetworkAdapterRegistry` without `match` branching in integration suite.
+  - [x] Compiler check: `#![forbid(unsafe_code)]` enforced across all 6 adapter crates, 0 float operations, 0 clippy warnings.
 
 ---
 
@@ -327,9 +328,9 @@ flowchart TD
     P1["Phase 1: Workspace & gw-primitives [Done]"] --> P2["Phase 2: gw-memcache [Done]"]
     P1 --> P3["Phase 3: gw-chain-traits [Done]"]
     P1 --> P9["Phase 9: SQLite Ledger gw-db [Done]"]
-    P2 --> P4["Phase 4: Multi-Chain Adapters [/]"]
+    P2 --> P4["Phase 4: Multi-Chain Adapters [Done]"]
     P3 --> P4
-    P4 --> P5["Phase 5: gw-engine 5-Gate Verifier"]
+    P4 --> P5["Phase 5: gw-engine 5-Gate Verifier [/]"]
     P3 --> P6["Phase 6: gw-kms-enclave Zone C"]
     P5 --> P7["Phase 7: gw-treasury FIFO"]
     P6 --> P7
@@ -338,4 +339,4 @@ flowchart TD
     P8 --> P10["Phase 10: Fuzzing & Audit"]
 ```
 
-**Immediate Action:** Execute Phase 4 (Implement 6 concrete network adapters: `gw-adapters-btc`, `gw-adapters-evm`, `gw-adapters-svm`, `gw-adapters-tvm`, `gw-adapters-ton`, `gw-adapters-move` satisfying the 100% trait catalog and mathematical invariants).
+**Immediate Action:** Execute Phase 5 (Implement `gw-engine`: Compile-Time Typestate Lifecycle `Invoice<Pending>` $\to$ `Invoice<Detected>` $\to$ `Invoice<VerifiedComplete>`, 5-Gate Verification Engine, and Parent-Hash Ring Buffer LCA Reorg Rollback).

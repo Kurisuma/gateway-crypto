@@ -17,3 +17,9 @@ uuid = { workspace = true }
 
 [dev-dependencies]
 tokio = { workspace = true }
+gw-adapters-btc = { workspace = true }
+gw-adapters-evm = { workspace = true }
+gw-adapters-svm = { workspace = true }
+gw-adapters-tvm = { workspace = true }
+gw-adapters-ton = { workspace = true }
+gw-adapters-move = { workspace = true }

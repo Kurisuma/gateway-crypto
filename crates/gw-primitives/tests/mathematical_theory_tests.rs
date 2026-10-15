@@ -6,7 +6,17 @@
 //! - `UNIFIED_RUST_CRYPTO_GATEWAY_AND_TREASURY_SPEC_THEORY.md` (V5.0 Formal)
 //! - `ENTERPRISE_IN_MEMORY_CACHE_SPEC_THEORY.md` (IMPRCE Sovereign Theory)
 
-#![allow(clippy::unwrap_used, clippy::expect_used)]
+#![allow(
+    clippy::unwrap_used,
+    clippy::expect_used,
+    clippy::indexing_slicing,
+    clippy::cast_possible_truncation,
+    clippy::cast_sign_loss,
+    clippy::too_many_arguments,
+    clippy::identity_op,
+    clippy::assign_op_pattern,
+    clippy::float_arithmetic
+)]
 
 use alloy_primitives::U256;
 use gw_primitives::{

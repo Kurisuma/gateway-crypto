@@ -1,0 +1,21 @@
+[package]
+name = "gw-adapters-move"
+version = "0.1.0"
+edition = "2024"
+
+[lints]
+workspace = true
+
+[dependencies]
+gw-primitives = { workspace = true }
+gw-chain-traits = { workspace = true }
+alloy-primitives = { workspace = true }
+async-trait = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+uuid = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }

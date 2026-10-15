@@ -4,6 +4,12 @@ members = [
     "crates/gw-primitives",
     "crates/gw-memcache",
     "crates/gw-chain-traits",
+    "crates/gw-adapters-btc",
+    "crates/gw-adapters-evm",
+    "crates/gw-adapters-svm",
+    "crates/gw-adapters-tvm",
+    "crates/gw-adapters-ton",
+    "crates/gw-adapters-move",
     "crates/gw-db",
 ]
 
@@ -22,11 +28,20 @@ indexing_slicing = "deny"
 
 [workspace.dependencies]
 gw-primitives = { path = "crates/gw-primitives" }
+gw-memcache = { path = "crates/gw-memcache" }
+gw-chain-traits = { path = "crates/gw-chain-traits" }
 gw-db = { path = "crates/gw-db" }
+gw-adapters-btc = { path = "crates/gw-adapters-btc" }
+gw-adapters-evm = { path = "crates/gw-adapters-evm" }
+gw-adapters-svm = { path = "crates/gw-adapters-svm" }
+gw-adapters-tvm = { path = "crates/gw-adapters-tvm" }
+gw-adapters-ton = { path = "crates/gw-adapters-ton" }
+gw-adapters-move = { path = "crates/gw-adapters-move" }
 alloy-primitives = { version = "0.8", default-features = false, features = ["serde"] }
 async-trait = "0.1"
 bitcoin = { version = "0.32", features = ["serde", "rand-std"] }
 chrono = { version = "0.4", features = ["serde"] }
+curve25519-dalek = { version = "4.1", default-features = false }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 sha2 = "0.10"
@@ -43,3 +58,4 @@ bs58 = "0.5"
 proptest = "1.6"
 oberer-orm = { git = "https://github.com/Kurisuma/Oberer-lite.git" }
 oberer-orm-derive = { git = "https://github.com/Kurisuma/Oberer-lite.git" }
+

@@ -1,0 +1,20 @@
+[package]
+name = "gw-adapters-ton"
+version = "0.1.0"
+edition = "2024"
+
+[lints]
+workspace = true
+
+[dependencies]
+gw-primitives = { workspace = true }
+gw-chain-traits = { workspace = true }
+alloy-primitives = { workspace = true }
+async-trait = { workspace = true }
+blake3 = { workspace = true }
+uuid = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
