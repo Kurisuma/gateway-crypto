@@ -1,0 +1,22 @@
+[package]
+name = "gw-kms-enclave"
+version = "0.1.0"
+edition = "2024"
+description = "Zone C air-gapped cryptographic enclave key signer, pre-sign policy guard, and memory hygiene"
+
+[lints]
+workspace = true
+
+[dependencies]
+gw-primitives = { workspace = true }
+gw-chain-traits = { workspace = true }
+async-trait = { workspace = true }
+sha2 = { workspace = true }
+subtle = { workspace = true }
+zeroize = { workspace = true }
+thiserror = { workspace = true }
+uuid = { workspace = true }
+serde = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }

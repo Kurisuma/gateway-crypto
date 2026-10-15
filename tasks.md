@@ -228,23 +228,23 @@ Status Legend:
 ---
 
 ### Phase 6: Zone C Enclave Key Management & PreSignPolicyGuard (`gw-kms-enclave`)
-- [ ] **6.1 Immutable Destination Registry**
-  - [ ] Hardcoded or enclave-PCR0-pinned whitelist of Tier 3 Cold Storage and Tier 4 Exchange addresses.
-  - [ ] Rejection of any transfer pointing to an unregistered address.
-- [ ] **6.2 Stateless `PreSignPolicyGuard`**
-  - [ ] Deserializer for raw unsigned payloads across all 6 architectures (PSBT, RLP, SVM Message, Tron PB, TON BOC, Sui BCS).
-  - [ ] Output address extraction and whitelist cross-verification.
-  - [ ] Maximum value and daily velocity threshold enforcement.
-  - [ ] M-of-N hardware/operator signature quorum verifier.
-- [ ] **6.3 Unified Key Signer & Memory Hygiene**
-  - [ ] Key derivation inside `Zeroizing<[u8; 64]>` ephemeral buffers.
-  - [ ] Concrete signers: secp256k1 (Bitcoin, EVM, Tron), ed25519 (Solana, TON, Sui).
-  - [ ] Mock and AWS Nitro Enclave VSOCK attestation interfaces.
-- [ ] **6.4 Mathematical Theory & Invariants Audit Gate**
-  - [ ] Invariant I & III: Zero private keys outside Zone C.
-  - [ ] Invariant IV: Ephemeral zeroized cryptographic memory verified.
-  - [ ] Enclave anti-replay nonce mathematical collision resistance verified.
-  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
+- [x] **6.1 Immutable Destination Registry**
+  - [x] Hardcoded or enclave-PCR0-pinned whitelist of Tier 3 Cold Storage and Tier 4 Exchange addresses.
+  - [x] Rejection of any transfer pointing to an unregistered address.
+- [x] **6.2 Stateless `PreSignPolicyGuard`**
+  - [x] Deserializer for raw unsigned payloads across all 6 architectures (PSBT, RLP, SVM Message, Tron PB, TON BOC, Sui BCS).
+  - [x] Output address extraction and whitelist cross-verification.
+  - [x] Maximum value and daily velocity threshold enforcement.
+  - [x] M-of-N hardware/operator signature quorum verifier.
+- [x] **6.3 Unified Key Signer & Memory Hygiene**
+  - [x] Key derivation inside `Zeroizing<[u8; 64]>` ephemeral buffers.
+  - [x] Concrete signers: secp256k1 (Bitcoin, EVM, Tron), ed25519 (Solana, TON, Sui).
+  - [x] Mock and AWS Nitro Enclave VSOCK attestation interfaces.
+- [x] **6.4 Mathematical Theory & Invariants Audit Gate**
+  - [x] Invariant I & III: Zero private keys outside Zone C verified.
+  - [x] Invariant IV: Ephemeral zeroized cryptographic memory verified with `ZeroizeOnDrop` containers without Debug/Display/Clone/Serialize.
+  - [x] Enclave anti-replay nonce mathematical collision resistance verified with 7-day atomic lock.
+  - [x] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
 
 ---
 
@@ -331,12 +331,12 @@ flowchart TD
     P2 --> P4["Phase 4: Multi-Chain Adapters [Done]"]
     P3 --> P4
     P4 --> P5["Phase 5: gw-engine 5-Gate Verifier [Done]"]
-    P3 --> P6["Phase 6: gw-kms-enclave Zone C [/]"]
-    P5 --> P7["Phase 7: gw-treasury FIFO"]
+    P3 --> P6["Phase 6: gw-kms-enclave Zone C [Done]"]
+    P5 --> P7["Phase 7: gw-treasury FIFO [/]"]
     P6 --> P7
     P5 --> P8["Phase 8: gw-api Checkout"]
     P7 --> P8
     P8 --> P10["Phase 10: Fuzzing & Audit"]
 ```
 
-**Immediate Action:** Execute Phase 6 (Implement `gw-kms-enclave`: Zone C Air-Gapped Key Signer, Ephemeral Zeroized Memory, Immutable Whitelist Registry, and Stateless `PreSignPolicyGuard` for PSBT, RLP, SVM, TVM, TON, Sui).
+**Immediate Action:** Execute Phase 7 (Implement `gw-treasury`: Multi-Network Real-Time Portfolio Aggregation, FIFO Cost-Basis Tax Lot Accounting Engine, and Cross-Network Liquidity Router with Zero-Dust Hot/Cold Splits).

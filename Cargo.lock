@@ -652,6 +652,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "gw-kms-enclave"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "gw-chain-traits",
+ "gw-primitives",
+ "serde",
+ "sha2",
+ "subtle",
+ "thiserror",
+ "tokio",
+ "uuid",
+ "zeroize",
+]
+
+[[package]]
 name = "gw-memcache"
 version = "0.1.0"
 dependencies = [
