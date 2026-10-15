@@ -1,0 +1,20 @@
+[package]
+name = "gw-engine"
+version = "0.1.0"
+edition = "2024"
+description = "Compile-time typestate invoice machine, 5-gate verification engine, and consensus reorg rollback"
+
+[lints]
+workspace = true
+
+[dependencies]
+gw-primitives = { workspace = true }
+gw-chain-traits = { workspace = true }
+alloy-primitives = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }

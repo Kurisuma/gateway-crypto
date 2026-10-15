@@ -206,24 +206,24 @@ Status Legend:
 ---
 
 ### Phase 5: Typestate Invoice Verification & 5-Gate Engine (`gw-engine`)
-- [ ] **5.1 Compile-Time Typestate Lifecycle Definition**
-  - [ ] `Invoice<Pending>`, `Invoice<Detected>`, `Invoice<Partial>`, `Invoice<VerifiedComplete>`, `Invoice<Expired>`.
-  - [ ] Value-consuming transition methods preventing invalid state mutations at compile time.
-- [ ] **5.2 5-Gate Verification Engine Implementation**
-  - [ ] **Gate 1 (Execution Status):** Validates transaction succeeded on-chain (EVM status=1, SVM err=None, TVM ret=SUCCESS, TON !aborted).
-  - [ ] **Gate 2 (Asset & Whitelist Match):** Strict verification against authorized token contracts/mints.
-  - [ ] **Gate 3 (Cumulative Amount & Slippage):** Evaluates underpayment, exact match within BPS tolerance, or overpayment.
-  - [ ] **Gate 4 (Timestamp & Expiration Guard):** Confirms block timestamp falls within valid quote duration window.
-  - [ ] **Gate 5 (Consensus Finality & Parent-Hash Continuity):** Verifies required confirmation depth and unbroken parent-hash chain.
-- [ ] **5.3 Reorg Detection & Rollback Engine**
-  - [ ] Parent-hash sliding window ring buffer (depth 32).
-  - [ ] Lowest Common Ancestor (LCA) search algorithm.
-  - [ ] Clean rollback of `Detected` invoices to `Pending` upon detected fork.
-- [ ] **5.4 Mathematical Theory & Invariants Audit Gate**
-  - [ ] 5-Gate Boolean logic and slip evaluation ($R_{\text{rec}} \ge R_{\min}$) formal tests.
-  - [ ] Typestate compile-time consumption invariants verified.
-  - [ ] LCA ring-buffer fork rollback invariant verified.
-  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
+- [x] **5.1 Compile-Time Typestate Lifecycle Definition**
+  - [x] `Invoice<Pending>`, `Invoice<Detected>`, `Invoice<Partial>`, `Invoice<VerifiedComplete>`, `Invoice<Expired>`.
+  - [x] Value-consuming transition methods preventing invalid state mutations at compile time.
+- [x] **5.2 5-Gate Verification Engine Implementation**
+  - [x] **Gate 1 (Execution Status):** Validates transaction succeeded on-chain (EVM status=1, SVM err=None, TVM ret=SUCCESS, TON !aborted).
+  - [x] **Gate 2 (Asset & Whitelist Match):** Strict verification against authorized token contracts/mints.
+  - [x] **Gate 3 (Cumulative Amount & Slippage):** Evaluates underpayment, exact match within BPS tolerance, or overpayment.
+  - [x] **Gate 4 (Timestamp & Expiration Guard):** Confirms block timestamp falls within valid quote duration window.
+  - [x] **Gate 5 (Consensus Finality & Parent-Hash Continuity):** Verifies required confirmation depth and unbroken parent-hash chain.
+- [x] **5.3 Reorg Detection & Rollback Engine**
+  - [x] Parent-hash sliding window ring buffer (depth 256).
+  - [x] Lowest Common Ancestor (LCA) search algorithm.
+  - [x] Clean rollback of `Detected` invoices to `Pending` upon detected fork.
+- [x] **5.4 Mathematical Theory & Invariants Audit Gate**
+  - [x] Theorem 5.1 (DAG Continuity Predicate & LCA Rollback): Tested and verified with simulated 2-block reorganization.
+  - [x] Theorem 5.2 (5-Gate Boolean Logic & Slippage Partitioning): Tested and verified across Reverted, Spoofed, Expired, StillDetected, Partial, and VerifiedCompleteExact/Overpaid.
+  - [x] Value-consuming typestate compile-time invariant verified: Downstream fulfillment strictly requires `Invoice<VerifiedComplete>`.
+  - [x] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
 
 ---
 
@@ -330,8 +330,8 @@ flowchart TD
     P1 --> P9["Phase 9: SQLite Ledger gw-db [Done]"]
     P2 --> P4["Phase 4: Multi-Chain Adapters [Done]"]
     P3 --> P4
-    P4 --> P5["Phase 5: gw-engine 5-Gate Verifier [/]"]
-    P3 --> P6["Phase 6: gw-kms-enclave Zone C"]
+    P4 --> P5["Phase 5: gw-engine 5-Gate Verifier [Done]"]
+    P3 --> P6["Phase 6: gw-kms-enclave Zone C [/]"]
     P5 --> P7["Phase 7: gw-treasury FIFO"]
     P6 --> P7
     P5 --> P8["Phase 8: gw-api Checkout"]
@@ -339,4 +339,4 @@ flowchart TD
     P8 --> P10["Phase 10: Fuzzing & Audit"]
 ```
 
-**Immediate Action:** Execute Phase 5 (Implement `gw-engine`: Compile-Time Typestate Lifecycle `Invoice<Pending>` $\to$ `Invoice<Detected>` $\to$ `Invoice<VerifiedComplete>`, 5-Gate Verification Engine, and Parent-Hash Ring Buffer LCA Reorg Rollback).
+**Immediate Action:** Execute Phase 6 (Implement `gw-kms-enclave`: Zone C Air-Gapped Key Signer, Ephemeral Zeroized Memory, Immutable Whitelist Registry, and Stateless `PreSignPolicyGuard` for PSBT, RLP, SVM, TVM, TON, Sui).

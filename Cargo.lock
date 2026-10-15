@@ -638,6 +638,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "gw-engine"
+version = "0.1.0"
+dependencies = [
+ "alloy-primitives",
+ "chrono",
+ "gw-chain-traits",
+ "gw-primitives",
+ "serde",
+ "thiserror",
+ "tokio",
+ "uuid",
+]
+
+[[package]]
 name = "gw-memcache"
 version = "0.1.0"
 dependencies = [
