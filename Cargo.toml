@@ -12,6 +12,7 @@ members = [
     "crates/gw-adapters-move",
     "crates/gw-engine",
     "crates/gw-kms-enclave",
+    "crates/gw-treasury",
     "crates/gw-db",
 ]
 
@@ -34,6 +35,7 @@ gw-memcache = { path = "crates/gw-memcache" }
 gw-chain-traits = { path = "crates/gw-chain-traits" }
 gw-engine = { path = "crates/gw-engine" }
 gw-kms-enclave = { path = "crates/gw-kms-enclave" }
+gw-treasury = { path = "crates/gw-treasury" }
 gw-db = { path = "crates/gw-db" }
 gw-adapters-btc = { path = "crates/gw-adapters-btc" }
 gw-adapters-evm = { path = "crates/gw-adapters-evm" }

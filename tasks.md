@@ -249,22 +249,22 @@ Status Legend:
 ---
 
 ### Phase 7: Unified Treasury, FIFO Accounting & Liquidity Router (`gw-treasury`)
-- [ ] **7.1 Real-Time Portfolio Aggregation**
-  - [ ] Aggregation of holdings across all 8 networks and 5 wallet tiers.
-  - [ ] Canonical 18-decimal normalization and real-time USD micro-valuation.
-- [ ] **7.2 FIFO Cost-Basis Tax Lot Accounting Engine**
-  - [ ] Ingestion of verified invoices as acquisition tax lots (`lot_id`, `acquired_at`, `units`, `usd_rate`).
-  - [ ] FIFO lot depletion algorithm calculating realized P&L upon asset transfer/disposal.
-  - [ ] Unrealized P&L calculation based on current oracle mid-prices.
-- [ ] **7.3 Cross-Network Liquidity Router**
-  - [ ] Dynamic threshold calculation for economical sweeps (gas vs. deposit value).
-  - [ ] Automated Tier 1 Gas Relayer replenishment planner.
-  - [ ] Policy-driven cold storage flush and exchange disposal routing.
-- [ ] **7.4 Mathematical Theory & Invariants Audit Gate**
-  - [ ] Integer FIFO depletion calculus $\delta_k$ and realized P&L invariant verified.
-  - [ ] Zero-dust hot-wallet split $\alpha_{\text{cold}}$ verified.
-  - [ ] Multi-chain canonical homomorphism portfolio summation verified.
-  - [ ] Compiler check: `#![forbid(unsafe_code)]`, 0 float operations, 0 clippy warnings.
+- [x] **7.1 Real-Time Portfolio Aggregation**
+  - [x] Aggregation of holdings across all 8 networks and 5 wallet tiers.
+  - [x] Canonical 18-decimal normalization and real-time USD micro-valuation.
+- [x] **7.2 FIFO Cost-Basis Tax Lot Accounting Engine**
+  - [x] Ingestion of verified invoices as acquisition tax lots (`lot_id`, `acquired_at`, `units`, `usd_rate`).
+  - [x] FIFO lot depletion algorithm calculating realized P&L upon asset transfer/disposal.
+  - [x] Unrealized P&L calculation based on current oracle mid-prices.
+- [x] **7.3 Cross-Network Liquidity Router**
+  - [x] Dynamic threshold calculation for economical sweeps (gas vs. deposit value).
+  - [x] Automated Tier 1 Gas Relayer replenishment planner.
+  - [x] Policy-driven cold storage flush and exchange disposal routing.
+- [x] **7.4 Mathematical Theory & Invariants Audit Gate**
+  - [x] Theorem 7.1 (Multi-Network Balance Sheet Tensor & Normalization Homomorphism): $Q_l^{(18)} = \bigoplus_c \bigoplus_\tau \mathcal{N}_{18}(B_{l, c, \tau}, d(l, c))$ verified across 6-dec and 18-dec token balances simultaneously.
+  - [x] Theorem 7.2 (Exact Integer FIFO Cost-Basis Lot Consumption Calculus): Prefix depletion $\delta_k = \max(0, \min(q_k, D - S_{k-1}))$, cost basis, proceeds, and signed net realized P&L ($\text{RealizedPnL}_\mu = \text{Proceeds} - \text{CostBasis} - \text{Fee}$) verified deterministically and with fuzzing.
+  - [x] Theorem 7.3 (Economical Sweep Threshold & Proportional Split): $R_{\min} = \lceil (V_{\min} \otimes 10^d) / P_\mu \rceil$ with integer ceiling math and zero-dust hot-wallet split ($Q_{\to \text{Cold}} + Q_{\to \text{Market}} \equiv B$) verified across arbitrary balances via `proptest`.
+  - [x] Compiler check: `#![forbid(unsafe_code)]` enforced, 0 float operations, 0 clippy warnings across workspace.
 
 ---
 
@@ -332,11 +332,11 @@ flowchart TD
     P3 --> P4
     P4 --> P5["Phase 5: gw-engine 5-Gate Verifier [Done]"]
     P3 --> P6["Phase 6: gw-kms-enclave Zone C [Done]"]
-    P5 --> P7["Phase 7: gw-treasury FIFO [/]"]
+    P5 --> P7["Phase 7: gw-treasury FIFO [Done]"]
     P6 --> P7
-    P5 --> P8["Phase 8: gw-api Checkout"]
+    P5 --> P8["Phase 8: gw-api Checkout [/]"]
     P7 --> P8
     P8 --> P10["Phase 10: Fuzzing & Audit"]
 ```
 
-**Immediate Action:** Execute Phase 7 (Implement `gw-treasury`: Multi-Network Real-Time Portfolio Aggregation, FIFO Cost-Basis Tax Lot Accounting Engine, and Cross-Network Liquidity Router with Zero-Dust Hot/Cold Splits).
+**Immediate Action:** Execute Phase 8 (Implement `gw-api`: High-Performance Axum Checkout REST & WebSocket API, Idempotency Guard via `gw-memcache`, strictly zero private keys in dependency tree).

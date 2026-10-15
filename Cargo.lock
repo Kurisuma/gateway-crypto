@@ -692,6 +692,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "gw-treasury"
+version = "0.1.0"
+dependencies = [
+ "alloy-primitives",
+ "async-trait",
+ "chrono",
+ "gw-chain-traits",
+ "gw-engine",
+ "gw-primitives",
+ "proptest",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "uuid",
+]
+
+[[package]]
 name = "hashbrown"
 version = "0.15.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"

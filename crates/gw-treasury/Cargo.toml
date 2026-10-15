@@ -1,0 +1,26 @@
+[package]
+name = "gw-treasury"
+version = "0.1.0"
+edition = "2024"
+authors = ["Antigravity Engineering"]
+description = "Unified multi-network real-time portfolio aggregation, integer FIFO cost-basis tax lot accounting, and cross-network optimal liquidity routing"
+license = "MIT OR Apache-2.0"
+
+[lints]
+workspace = true
+
+[dependencies]
+gw-primitives = { workspace = true }
+gw-chain-traits = { workspace = true }
+gw-engine = { workspace = true }
+alloy-primitives = { workspace = true }
+async-trait = { workspace = true }
+chrono = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+uuid = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }
